@@ -35,8 +35,11 @@ class Vector3:
         self.y *= other
         self.z *= other
 
+    def roundedVec(self, figs=None):
+        return Vector3(round(self.x, figs), round(self.y, figs), round(self.z, figs))
+    
     def __str__(self):
-        return "x: " + str(self.x) + "   y: " + str(self.y) + "   z:" + str(self.z)
+        return "(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
     
     def getMagnitude(self):
         return math.sqrt(pow(self.x,2)+pow(self.y,2)+pow(self.z,2))

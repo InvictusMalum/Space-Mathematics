@@ -1,4 +1,5 @@
 import math
+from functions import distance
 
 class Vector3:
     def __init__(self, x=0, y=0, z=0):
@@ -43,4 +44,19 @@ class Vector3:
     
     def getMagnitude(self):
         return math.sqrt(pow(self.x,2)+pow(self.y,2)+pow(self.z,2))
+
+    def rot3D(p1, rpy):
+        rollTheta = math.atan2(p1.z,p1.y)
+        dist = distance(p1.y,p1.z)
+        pOut = Vector3(p1.x, dist*math.cos(rollTheta+rpy.x), dist*math.sin(rollTheta+rpy.x))
+        
+        pitchTheta = math.atan2(pOut.x,pOut.z)
+        dist = distance(p1.z,p1.x)
+        pOut = Vector3(dist*math.sin(pitchTheta+rpy.y), pOut.y, dist*math.cos(pitchTheta+rpy.y))
+        
+        yawTheta = math.atan2(pOut.y,pOut.x)
+        dist = distance(p1.x,p1.y)
+        pOut = Vector3(dist*math.cos(yawTheta+rpy.z), dist*math.sin(yawTheta+rpy.z), pOut.z)
+        
+        return pOut
     
